@@ -47,6 +47,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+#app {
+  position: relative;
+}
+
 .color-01 { color: #FF1461; } /* Red */
 .color-02 { color: #FF7C72; } /* Orange */
 .color-03 { color: #FBF38C; } /* Yellow */

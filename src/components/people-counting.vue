@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="people-counting">
     {{`现在有${number}人在休息室`}}
   </div>
 </template>
@@ -15,5 +15,12 @@ export default class extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+.people-counting {
+  position: absolute;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  line-height: 100vh;
+  text-align: center;
+}
 </style>
