@@ -42,7 +42,6 @@ header {
 }
 
 body {
-  position: absolute;
   color: white;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

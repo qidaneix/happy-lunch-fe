@@ -1,14 +1,16 @@
 <template>
   <div class="people-counting">
-    <span v-show="!isError && !isReady">
-      现在有多少人在休息室 (⊙o⊙)？
-    </span>
-    <span v-show="isError">
-      我也不知道 (ಥ_ಥ)
-    </span>
-    <span v-show="!isError && isReady">
-      现在有<span class="color-01">{{number}}</span>人在休息室 (´･ω･`)
-    </span>
+    <transition name="fade">
+      <div v-if="!isError && !isReady" class="item item-1" key="hold">
+        现在有多少人在休息室 (⊙o⊙)？
+      </div>
+      <div v-if="isError" class="item item-2" key="error">
+        我也不知道 (ಥ_ಥ)
+      </div>
+      <div v-if="!isError && isReady" class="item item-3" key="ready">
+        现在有<span class="color-01">{{number}}</span>人在休息室 (´･ω･`)
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -54,15 +56,29 @@ export default class extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .people-counting {
   position: absolute;
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  line-height: 100vh;
-  text-align: center;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  > .item {
+    position: absolute;
+    flex: none;
+    &.item-1 {
+      z-index: 12;
+    }
+    &.item-2 {
+      z-index: 11;
+    }
+    &.item-3 {
+      z-index: 10;
+    }
+  }
   font-size: 4vw;
 }
 
@@ -70,5 +86,18 @@ export default class extends Vue {
   .people-counting {
     font-size: 6vw;
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all 1s;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}
+.fade-enter {
+  transform: translateY(-4vw);
+}
+.fade-leave-active {
+  transform: translateY(4vw);
 }
 </style>
