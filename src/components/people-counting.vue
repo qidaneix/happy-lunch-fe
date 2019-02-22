@@ -7,7 +7,7 @@
       我也不知道 (ಥ_ಥ)
     </span>
     <span v-show="!isError && isReady">
-      {{`现在有${number}人在休息室 ( •̀∀•́ )`}}
+      现在有<span class="color-01">{{number}}</span>人在休息室 (´･ω･`)
     </span>
   </div>
 </template>
@@ -15,7 +15,10 @@
 <script lang="ts">
 import axios from 'axios';
 import io from 'socket.io-client';
+import anime from 'animejs';
 import { Component, Prop, Vue } from 'vue-property-decorator';
+
+import { Res, Result } from '@/interface';
 
 @Component
 export default class extends Vue {
@@ -26,7 +29,7 @@ export default class extends Vue {
   public created() {
     setTimeout(() => {
       // 获取初始化数据
-      axios.get('/res').then((resp) => {
+      axios.get<Res<Result>>('/res').then((resp) => {
         this.number = resp.data.result.personNum;
         this.isReady = true;
       }, () => {
@@ -36,8 +39,14 @@ export default class extends Vue {
       // 主动推送
       const socket = io();
       socket.on('res', (res: string) => {
-        const msg = JSON.parse(res);
-        this.number = msg.result.personNum;
+        const msg = JSON.parse(res) as Res<Result>;
+        anime({
+          targets: this,
+          number: msg.result.personNum,
+          round: 1,
+          duration: 2000,
+          easing: 'easeInOutExpo',
+        });
         this.isReady = true;
       });
     }, 1500);
