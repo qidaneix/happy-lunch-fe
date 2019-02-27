@@ -49,6 +49,7 @@ body {
 
 #app {
   position: relative;
+  cursor: pointer;
 }
 
 .color-01 { color: #FF1461; } /* Red */

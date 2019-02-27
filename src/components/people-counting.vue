@@ -1,14 +1,14 @@
 <template>
   <div class="people-counting">
     <transition name="fade">
-      <div v-if="!isError && !isReady" class="item item-1" key="hold">
+      <div class="item item-1" v-if="!isError && !isReady" key="hold">
         现在有多少人在休息室 (⊙o⊙)？
       </div>
-      <div v-if="isError" class="item item-2" key="error">
+      <div class="item item-2" v-if="isError" key="error">
         我也不知道 (ಥ_ಥ)
       </div>
-      <div v-if="!isError && isReady" class="item item-3" key="ready">
-        现在有<span class="color-01">{{number}}</span>人在休息室 (´･ω･`)
+      <div class="item item-3" v-if="!isError && isReady" key="ready">
+        现在有<span class="color-01">{{number}}</span>人在休息室 ( •̀∀•́ )
       </div>
     </transition>
   </div>
@@ -51,7 +51,7 @@ export default class extends Vue {
         });
         this.isReady = true;
       });
-    }, 1500);
+    }, 2000);
   }
 }
 </script>
@@ -66,6 +66,7 @@ export default class extends Vue {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 4vw;
   > .item {
     position: absolute;
     flex: none;
@@ -79,7 +80,6 @@ export default class extends Vue {
       z-index: 10;
     }
   }
-  font-size: 4vw;
 }
 
 @media (max-width: 767.98px) {
@@ -89,7 +89,7 @@ export default class extends Vue {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: all 1s;
+  transition: all 1s ease-in;
 }
 .fade-enter, .fade-leave-active {
   opacity: 0;
